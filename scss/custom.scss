@@ -1,0 +1,241 @@
+// Custom.scss
+
+// Variable Overrides
+
+// Bootstrap and its default variables
+@import "../bootstrap/scss/bootstrap";
+
+// Sass Variables
+$theme-black: #2f3131; // currently unused
+$theme-white: #f8f1e5;
+$theme-blue: #426e86;
+$theme-yellow: #f9ba32;
+$theme-font: "Avenir";
+
+%set-width-to-parent {
+    width: 100%;
+    height: auto;
+}
+
+body {
+    // General theme
+    background-color: $theme-blue;
+    color: $theme-white;
+    font-family: $theme-font;
+
+    // Yellow emphasis
+    span.emphasis {
+        color: $theme-yellow;
+    }
+
+    // Custom navbar style
+    .navbar{
+
+        .nav-link {
+            color:$theme-white;
+            position: relative;
+        }
+
+        .navbar-brand {
+            color:$theme-white;
+        }
+
+        // Yellow underline on hover
+        .nav-link:hover:after {
+            content: "";
+            border-bottom: 3px solid $theme-yellow;
+            border-radius: 3px;
+            position: absolute;
+            width: 60%;
+            left: 20%;
+            bottom: 4px;
+        }
+
+        // Highlight active page
+        #navbarSupportedContent .active .nav-link{
+            color:$theme-yellow;
+            font-weight: bold;
+        }
+
+        // Center items in hamburger dropdown menu
+        .navbar-collapse {
+            text-align: center;
+        }
+
+        // Override hamburger button color
+        .navbar-toggler {
+            border-color: $theme-white;
+        }
+
+        .navbar-toggler:focus {
+            outline: none;
+        }
+
+    }
+
+    // Set margin for all Bootstrap rows
+    div.container div.row {
+        margin: 32px;
+    }
+
+    // Style for headers
+    .center-header {
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    // Style for home.html
+    .home {
+        div {
+            .home-img {
+                height: 500px;
+                width: 350px;
+                object-fit: cover;
+                border: 1px solid $theme-white;
+            }
+            h1 {
+                font-size: 5vw;
+            }
+        }
+    }
+
+    .long-text p {
+        font-size: 24px;
+    }
+
+    // Style for skills.html
+    .skills {
+        div {
+            p {
+                font-size: 32px;
+                font-weight: bold;
+
+                .skills-desc {
+                    font-size: 24px;
+                }
+            }
+
+            .skills-img {
+                height: 200px;
+                width: 300px;
+                object-fit: cover;
+            }
+        }
+    }
+
+    // Style for work.html
+    .work {
+        div {
+            padding: 20px;
+            .work-logo {
+                @extend %set-width-to-parent;
+                object-fit: cover;
+                background-color: #FFFFFF;
+            }
+            .linked:hover {
+                border: $theme-yellow solid 5px;
+            }
+        }
+    }
+
+    // Style unordered list of projects
+    .project-list {
+        font-size: 24px;
+        list-style: circle inside;
+
+        li {
+            margin-top: 20px;
+        }
+    }
+
+    // Style table of connect links 
+    table.connect {
+        width: 100%;
+        font-size: 40px;
+        text-align: center;
+
+        tr {
+            height: 3em; // dependent on table font-size
+
+            td {
+                width: 50%;
+                a {
+                    color: $theme-white; // override default hyperlink color
+                }
+            }
+
+            td a:hover {
+                color: $theme-yellow;
+                text-decoration: none;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        .container {
+            // remove side margins
+            max-width: 991.98px;
+
+            // responsive font size
+            div.home-left h1 {
+                font-size: 6vw;
+            }
+
+            // responsive home image
+            div.home-right .home-img {
+                height: auto;
+                width: 100%;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+        // fixed font size
+        .home div.home-left h1 {
+            font-size: 40px;
+        }
+
+        // Fix font size
+        .long-text p {
+            font-size: 20px;
+        }
+
+        // In sm screens, image and text stack vertically, centered on the page
+        .skills div {
+            min-height: 180px;
+            p {
+                text-align: center;
+                padding: 30px;
+            }
+            .skills-img {
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%,0%);
+            }
+        }
+    }
+
+    // In xs screens, superimpose the text and image
+    @include media-breakpoint-down(xs) {
+        .home {
+            div.home-right {
+                width: 100%;
+                position: relative;
+                z-index: 1;
+                padding: 0%;
+            }
+            div.home-left {
+                position: absolute;
+                left: 67%;
+                width: 50%;
+                top: 40%;
+                transform: translate(-50%,-50%);
+                z-index: 2;
+                h1 {
+                    color: $theme-blue;
+                }
+            }
+        }
+    }
+
+}
